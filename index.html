@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Game</title>
+    <style>
+        body {
+            background-color: rgb(238, 207, 167);
+        }
+
+        .gcontainer {
+            padding: 3vw;
+            ;
+        }
+
+        .box {
+            border: solid #544179;
+            /* border-style: solid; */
+            height: 13vmax;
+            width: 50vmax;
+            text-align: center;
+            font-size: 8vmax;
+            font-family: Arial, Helvetica, sans-serif;
+            cursor: pointer;
+        }
+
+        .box:hover {
+            background-color: #b8e0ff;
+
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .line {
+
+            height: 3px;
+            width: 0;
+            position: absolute;
+            background-color: #FF5151;
+            transition: width 1s ease-in-out;
+        }
+
+        .gif {
+            width: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand " href="#">Game</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div> -->
+        </div>
+    </nav>
+    <br>
+
+    <div class="gcontainer ">
+        <div class="row">
+
+            <div class="col">
+
+                <div class="container">
+
+                    <div class="line"></div>
+                    <div class="row">
+                        <div class="col box   border-5 border-top-0 border-start-0 ">
+                            <div class="box0 "><span class="boxtext"></span></div>
+                        </div>
+                        <div class="col box  border-5 border-top-0">
+                            <div class="box1 "><span class="boxtext"></span></div>
+                        </div>
+                        <div class="col box   border-5 border-top-0 border-end-0 ">
+                            <div class="box2 "><span class="boxtext"></span></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col box  border-5  border-start-0 ">
+                            <div class="box3 "><span class="boxtext"></span></div>
+                        </div>
+                        <div class="col box  border-5 ">
+                            <div class="box4 "><span class="boxtext"></span></div>
+                        </div>
+                        <div class="col box  border-5 border-end-0">
+                            <div class="box5  "><span class="boxtext"></span></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col box border-5 border-bottom-0 border-start-0">
+                            <div class="box6 "><span class="boxtext"></span></div>
+                        </div>
+                        <div class="col box border-5 border-bottom-0">
+                            <div class="box7 "><span class="boxtext"></span></div>
+                        </div>
+                        <div class="col box border-5 border-bottom-0 border-end-0">
+                            <div class="box8  "><span class="boxtext"></span></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <div class="col text-center">
+                <br><br><br><br>
+                <h1>Welcome</h1>
+                <br>
+                <h3>its "X" turn</h3>
+                <img src="giphy.gif" alt="" class="gif"><br>
+                <button class="btn btn-dark btn-lg">Reset</button>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script>
+        let turn = "X"
+        let bl = new Audio('x.mp3')
+        let gr = new Audio('o.mp3')
+        let cr = new Audio('crash.mp3')
+
+
+
+
+        function changeturn() {
+            if (turn === "X") {
+                turn = "O"
+                bl.play();
+            } else if (turn === "O") {
+                turn = "X"
+                gr.play()
+
+            }
+        }
+
+
+
+
+        var boxxx = document.getElementsByClassName("box");
+        Array.from(boxxx).forEach(Element => {
+            let boxtext1 = Element.querySelector(".boxtext");
+            Element.addEventListener('click', () => {
+                if (boxtext1.innerHTML === "") {
+                    boxtext1.innerHTML = turn;
+                    changeturn();
+                    document.querySelector("h3").innerHTML = "its " + '"' + turn + '"' + " turn";
+                    checkwin();
+
+
+                }
+
+
+
+            })
+
+        })
+
+
+        const checkwin = () => {
+            let boxtexts = document.getElementsByClassName("boxtext");
+            let boxxx = document.getElementsByClassName("box");
+            let win = [
+                [0, 1, 2, 0, 5.7, 0],
+                [3, 4, 5, 0, 19, 0],
+                [6, 7, 8, 0, 32, 0],
+                [0, 3, 6, -17.3, 19, 90],
+                [1, 4, 7, -0.3, 19, 90],
+                [2, 5, 8, 16.6, 19, 90],
+                [0, 4, 8, 0.8, 19.9, 38.3],
+                [2, 4, 6, -1.5, 19.9, 142.5],
+            ]
+            win.forEach(x => {
+                if (boxtexts[x[0]].innerText === boxtexts[x[1]].innerText && boxtexts[x[2]].innerText ===
+                    boxtexts[x[1]].innerText && boxtexts[x[0]].innerText !== "") {
+                    document.querySelector("h3").innerText = '"' + boxtexts[x[0]].innerText +
+                        '"' + " won";
+                    document.querySelector(".line").style.transform =
+                        `translate(${x[3]}vw, ${x[4]}vw) rotate(${x[5]}deg)`;
+                    document.querySelector(".line").style.width = "49vw"
+                    document.querySelector(".gif").style.width = "30vw"
+                    boxtexts[x[0]].style.color = '#69DADB'
+                    boxtexts[x[1]].style.color = '#69DADB'
+                    boxtexts[x[2]].style.color = '#69DADB'
+
+                    boxxx[x[0]].style.backgroundColor = "grey";
+                    boxxx[x[1]].style.backgroundColor = "grey";
+                    boxxx[x[2]].style.backgroundColor = "grey";
+
+                    // boxxx[x[0]].style.backgroundColor = "#F0E9D2";
+                    // boxxx[x[1]].style.backgroundColor = "#F0E9D2";
+                    // boxxx[x[2]].style.backgroundColor = "#F0E9D2";
+                    cr.play()
+                    turn = ""
+                    bl.pause();
+                    gr.pause();
+                    if (Element.querySelector(".boxtext").innerHTML === "") {
+                        Element.querySelector(".boxtext").innerHTML === ""
+
+
+
+
+                    }
+
+
+
+                }
+                // else if (boxtexts[x[0]].innerText !== boxtexts[x[1]].innerText && boxtexts[x[2]].innerText !==
+                //     boxtexts[x[1]].innerText && boxtexts[x[0]].innerText === "") {
+                //     document.querySelector("h3").innerText = "it's draw";
+                // }
+            })
+        }
+
+        // const win=()=> {
+
+        //   if (document.querySelector(".box0 .boxtext").innerHTML ==="X" && document.querySelector(".box1 .boxtext")
+        //         .innerHTML ==="X" && document.querySelector(".box2 .boxtext").innerHTML ==="X" ) {
+        //         document.querySelector("h3").innerHTML = '"' + document.querySelector(".box2 .boxtext").innerHTML +
+        //             '"' + " won"
+
+        //     }else if (document.querySelector(".box3 .boxtext").innerHTML ==="X" && document.querySelector(".box4 .boxtext")
+        //         .innerHTML ==="X" && document.querySelector(".box5 .boxtext").innerHTML ==="X" ) {
+        //         document.querySelector("h3").innerHTML = '"' + document.querySelector(".box5 .boxtext").innerHTML +
+        //             '"' + " won"
+
+        //     }else if (document.querySelector(".box6 .boxtext").innerHTML ==="X" && document.querySelector(".box7 .boxtext")
+        //         .innerHTML ==="X" && document.querySelector(".box8 .boxtext").innerHTML ==="X" ) {
+        //         document.querySelector("h3").innerHTML = '"' + document.querySelector(".box8 .boxtext").innerHTML +
+        //             '"' + " won"
+
+        //     }else if (document.querySelector(".box0 .boxtext").innerHTML ==="X" && document.querySelector(".box3 .boxtext")
+        //         .innerHTML ==="X" && document.querySelector(".box6 .boxtext").innerHTML ==="X" ) {
+        //         document.querySelector("h3").innerHTML = '"' + document.querySelector(".box6 .boxtext").innerHTML +
+        //             '"' + " won"
+
+        //     }else if (document.querySelector(".box1 .boxtext").innerHTML ==="X" && document.querySelector(".box4 .boxtext")
+        //         .innerHTML ==="X" && document.querySelector(".box7 .boxtext").innerHTML ==="X" ) {
+        //         document.querySelector("h3").innerHTML = '"' + document.querySelector(".box7 .boxtext").innerHTML +
+        //             '"' + " won"
+
+        //     }else if (document.querySelector(".box2 .boxtext").innerHTML ==="X" && document.querySelector(".box5 .boxtext")
+        //         .innerHTML ==="X" && document.querySelector(".box8 .boxtext").innerHTML ==="X" ) {
+        //         document.querySelector("h3").innerHTML = '"' + document.querySelector(".box8 .boxtext").innerHTML +
+        //             '"' + " won"
+
+        //     }else if (document.querySelector(".box0 .boxtext").innerHTML ==="X" && document.querySelector(".box4 .boxtext")
+        //         .innerHTML ==="X" && document.querySelector(".box8 .boxtext").innerHTML ==="X" ) {
+        //         document.querySelector("h3").innerHTML = '"' + document.querySelector(".box8 .boxtext").innerHTML +
+        //             '"' + " won"
+
+        //     }else if (document.querySelector(".box2 .boxtext").innerHTML ==="X" && document.querySelector(".box4 .boxtext")
+        //         .innerHTML ==="X" && document.querySelector(".box6 .boxtext").innerHTML ==="X" ) {
+        //         document.querySelector("h3").innerHTML = '"' + document.querySelector(".box6 .boxtext").innerHTML +
+        //             '"' + " won"
+
+        //     } else  if (document.querySelector(".box0 .boxtext").innerHTML ==="O" && document.querySelector(".box1 .boxtext")
+        //         .innerHTML ==="O" && document.querySelector(".box2 .boxtext").innerHTML ==="O" ) {
+        //         document.querySelector("h3").innerHTML = '"' + document.querySelector(".box2 .boxtext").innerHTML +
+        //             '"' + " won"
+
+        //     }else if (document.querySelector(".box3 .boxtext").innerHTML ==="O" && document.querySelector(".box4 .boxtext")
+        //         .innerHTML ==="O" && document.querySelector(".box5 .boxtext").innerHTML ==="O" ) {
+        //         document.querySelector("h3").innerHTML = '"' + document.querySelector(".box5 .boxtext").innerHTML +
+        //             '"' + " won"
+
+        //     }else if (document.querySelector(".box6 .boxtext").innerHTML ==="O" && document.querySelector(".box7 .boxtext")
+        //         .innerHTML ==="O" && document.querySelector(".box8 .boxtext").innerHTML ==="O" ) {
+        //         document.querySelector("h3").innerHTML = '"' + document.querySelector(".box8 .boxtext").innerHTML +
+        //             '"' + " won"
+
+        //     }else if (document.querySelector(".box0 .boxtext").innerHTML ==="O" && document.querySelector(".box3 .boxtext")
+        //         .innerHTML ==="O" && document.querySelector(".box6 .boxtext").innerHTML ==="O" ) {
+        //         document.querySelector("h3").innerHTML = '"' + document.querySelector(".box6 .boxtext").innerHTML +
+        //             '"' + " won"
+
+        //     }else if (document.querySelector(".box1 .boxtext").innerHTML ==="O" && document.querySelector(".box4 .boxtext")
+        //         .innerHTML ==="O" && document.querySelector(".box7 .boxtext").innerHTML ==="O" ) {
+        //         document.querySelector("h3").innerHTML = '"' + document.querySelector(".box7 .boxtext").innerHTML +
+        //             '"' + " won"
+
+        //     }else if (document.querySelector(".box2 .boxtext").innerHTML ==="O" && document.querySelector(".box5 .boxtext")
+        //         .innerHTML ==="O" && document.querySelector(".box8 .boxtext").innerHTML ==="O" ) {
+        //         document.querySelector("h3").innerHTML = '"' + document.querySelector(".box8 .boxtext").innerHTML +
+        //             '"' + " won"
+
+        //     }else if (document.querySelector(".box0 .boxtext").innerHTML ==="O" && document.querySelector(".box4 .boxtext")
+        //         .innerHTML ==="O" && document.querySelector(".box8 .boxtext").innerHTML ==="O" ) {
+        //         document.querySelector("h3").innerHTML = '"' + document.querySelector(".box8 .boxtext").innerHTML +
+        //             '"' + " won"
+
+        //     }else if (document.querySelector(".box2 .boxtext").innerHTML ==="O" && document.querySelector(".box4 .boxtext")
+        //         .innerHTML ==="O" && document.querySelector(".box6 .boxtext").innerHTML ==="O" ) {
+        //         document.querySelector("h3").innerHTML = '"' + document.querySelector(".box6 .boxtext").innerHTML +
+        //             '"' + " won"
+
+        //     }
+
+
+
+
+
+
+        //  else if (document.querySelector(".box3 .boxtext").innerHTML === document.querySelector(".box4 .boxtext")
+        //     .innerHTML && document.querySelector(".box5 .boxtext").innerHTML === document.querySelector(
+        //         ".box3 .boxtext").innerHTML && document.querySelector(".boxtext").innerHTML !== "") {
+        //     document.querySelector("h3").innerHTML = '"' + document.querySelector(".box5 .boxtext").innerHTML +
+        //         '"' + " won"
+        // } else if (document.querySelector(".box6 .boxtext").innerHTML === document.querySelector(".box7 .boxtext")
+        //     .innerHTML && document.querySelector(".box8 .boxtext").innerHTML === document.querySelector(
+        //         ".box6 .boxtext").innerHTML && document.querySelector(".boxtext").innerHTML !== "") {
+        //     document.querySelector("h3").innerHTML = '"' + document.querySelector(".box7 .boxtext").innerHTML +
+        //         '"' + " won"
+        // }
+
+        // }
+
+
+        document.querySelector(".btn").addEventListener('click', () => {
+            let boxtexts = document.getElementsByClassName("boxtext")
+            Array.from(boxtexts).forEach(e => {
+                e.innerText = ""
+                e.style.color = '#000'
+            })
+            turn = "X";
+            document.querySelector("h3").innerHTML = "its " + '"' + turn + '"' + " turn";
+            document.querySelector(".line").style.width = "0vw"
+            document.querySelector(".gif").style.width = "0vw"
+           let m= document.querySelectorAll(".box")
+           Array.from(m).forEach(n=>{
+               n.style.backgroundColor="rgb(238, 207, 167)";
+           })
+
+            
+
+
+
+        })
+    </script>
+
+</body>
+
+</html>
